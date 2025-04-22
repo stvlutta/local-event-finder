@@ -32,9 +32,14 @@ src/
 ├── data/          # Mock data and constants
 ├── hooks/         # Custom React hooks
 ├── pages/         # Page components
-├── services/      # API services
-└── utils/         # Utility functions
+└── services/      # API services
 ```
+
+> Note: This project has been optimized by removing unnecessary files including: 
+> - setupTests.js
+> - reportWebVitals.js
+> - logo.svg
+> - App.test.js
 
 ## Getting Started
 
@@ -81,9 +86,7 @@ By default, the application uses mock data. To connect to the EventBrite API:
 ## Available Scripts
 
 - `npm start` - Runs the app in development mode
-- `npm test` - Launches the test runner
 - `npm run build` - Builds the app for production
-- `npm run eject` - Ejects from Create React App (one-way operation)
 
 ## Contributing
 
@@ -99,4 +102,4 @@ This project is licensed under the MIT License
 
 ---
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and optimized for better performance.
