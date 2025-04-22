@@ -1,0 +1,424 @@
+/* App-wide CSS Variables - Eventbrite Color Scheme */
+:root {
+  --color-primary: #1E0A3C;         /* Eventbrite dark purple */
+  --color-secondary: #D1410C;       /* Eventbrite orange/red */
+  --color-background: #FFFFFF;      /* Clean white */
+  --color-accent: #3659E3;          /* Eventbrite blue accent */
+  --color-text: #1E0A3C;            /* Dark purple for text */
+  --color-primary-dark: #16082E;    /* Darker purple */
+  --color-secondary-dark: #B23709;  /* Darker orange */
+  --color-gray-light: #F8F7FA;      /* Light purple-gray */
+  --color-gray-medium: #DBDAE3;     /* Medium gray for subtle elements */
+  --color-success: #39B54A;         /* Green */
+  --color-warning: #F8A120;         /* Amber */
+  --color-info: #3659E3;            /* Info blue */
+  --color-text-light: #6F7287;      /* Medium dark for secondary text */
+  --color-text-on-dark: #FFFFFF;    /* White text on dark backgrounds */
+  --color-border: #EEEDF2;          /* Subtle border color */
+  
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #1E0A3C 0%, #39364F 100%);
+  --gradient-secondary: linear-gradient(135deg, #D1410C 0%, #F05537 100%);
+  --gradient-accent: linear-gradient(135deg, #3659E3 0%, #6B7BF3 100%);
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(40, 28, 60, 0.12), 0 1px 2px rgba(40, 28, 60, 0.08);
+  --shadow-md: 0 4px 6px rgba(40, 28, 60, 0.1), 0 2px 4px rgba(40, 28, 60, 0.06);
+  --shadow-lg: 0 10px 15px rgba(40, 28, 60, 0.1), 0 4px 6px rgba(40, 28, 60, 0.05);
+  --shadow-xl: 0 20px 25px rgba(40, 28, 60, 0.1), 0 10px 10px rgba(40, 28, 60, 0.04);
+  --shadow-inner: inset 0 2px 4px rgba(40, 28, 60, 0.06);
+  
+  /* Border Radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 50px; /* Rounded corners for buttons */
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-full: 9999px;
+}
+
+/* Import Neue Plak - Eventbrite's primary font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* Global styles with Eventbrite styling */
+body {
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif; /* Closest to Eventbrite's Neue Plak font */
+  background-color: #FFFFFF; /* Clean white background - no pattern */
+  color: #1E0A3C; /* Eventbrite dark purple text */
+  line-height: 1.5;
+  font-size: 16px; /* Base font size */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  position: relative;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Inter', sans-serif; /* Eventbrite uses the same font for everything */
+  font-weight: 700; /* Bold headings */
+  line-height: 1.2;
+  color: #1E0A3C; /* Eventbrite dark purple */
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+h1 { 
+  font-size: 2.5rem; 
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+h2 { 
+  font-size: 2rem; 
+  letter-spacing: -0.01em;
+}
+
+/* Eventbrite doesn't use decorative underlines */
+h2::after {
+  content: none;
+}
+
+h3 { 
+  font-size: 1.5rem; 
+  font-weight: 700;
+}
+
+h4 { 
+  font-size: 1.25rem; 
+  font-weight: 700;
+}
+
+h5 { 
+  font-size: 1rem; 
+  font-weight: 700;
+}
+
+h6 { 
+  font-size: 0.875rem; 
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+p {
+  margin-bottom: 1rem;
+  font-size: 1rem; /* 16px */
+  color: #6F7287; /* Eventbrite text color */
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* Improve readability on small screens */
+@media (max-width: 768px) {
+  body {
+    font-size: 15px;
+  }
+  
+  h1 { font-size: 1.875rem; }
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.25rem; }
+}
+
+a {
+  color: #3659E3; /* Eventbrite blue */
+  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+a:hover {
+  color: #2548C7; /* Darker blue */
+  text-decoration: underline;
+}
+
+/* Specific styling for the event tags - Eventbrite style */
+.event-tag {
+  display: inline-block;
+  border: 1px solid #DBDAE3; /* Eventbrite border color */
+  border-radius: 4px; /* Eventbrite uses smaller radius for tags */
+  font-weight: 400;
+  background-color: transparent;
+}
+
+.event-tag:hover {
+  border-color: #A9A8B3;
+  background-color: #F8F7FA;
+}
+
+/* Backup override for styled components */
+[class*="styled"] a:hover {
+  color: inherit;
+}
+
+button, .btn {
+  transition: all 0.2s ease;
+  font-weight: 600;
+  font-size: 0.875rem;
+  border-radius: 50px; /* Rounded corners for consistent style */
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  padding: 12px 24px;
+  border: none;
+  text-align: center;
+  outline: none;
+}
+
+/* Eventbrite primary button */
+.btn-primary {
+  background-color: #D1410C; /* Eventbrite orange */
+  color: white;
+  font-weight: 600;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #B23709; /* Darker orange */
+}
+
+/* Eventbrite secondary button */
+.btn-secondary {
+  background-color: #FFFFFF;
+  color: #1E0A3C; /* Dark purple */
+  border: 2px solid #DBDAE3;
+}
+
+.btn-secondary:hover {
+  background-color: #F8F7FA;
+  border-color: #A9A8B3;
+}
+
+/* Text utilities */
+.text-primary { color: var(--color-primary) !important; }
+.text-secondary { color: var(--color-secondary) !important; }
+.text-dark { color: var(--color-text) !important; }
+.text-light { color: var(--color-text-light) !important; }
+.text-white { color: var(--color-text-on-dark) !important; }
+
+.text-bold { font-weight: 700 !important; }
+.text-semibold { font-weight: 600 !important; }
+.text-medium { font-weight: 500 !important; }
+.text-regular { font-weight: 400 !important; }
+.text-light { font-weight: 300 !important; }
+
+/* Improve text contrast for better accessibility */
+.bg-primary { 
+  background-color: var(--color-primary) !important;
+  color: var(--color-text-on-dark) !important;
+}
+.bg-secondary { 
+  background-color: var(--color-secondary) !important;
+  color: var(--color-text-on-dark) !important;
+}
+.bg-accent { 
+  background-color: var(--color-accent) !important;
+  color: var(--color-text-on-dark) !important;
+}
+
+/* Utility classes */
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-grow {
+  flex-grow: 1;
+}
+
+/* Eventbrite Card Styles */
+.card {
+  border-radius: 8px; /* Eventbrite uses subtle radius */
+  background-color: #FFFFFF;
+  box-shadow: 0 2px 6px rgba(40, 28, 60, 0.1); /* Subtle shadow */
+  transition: all 0.2s ease;
+  border: 1px solid #EEEDF2; /* Eventbrite border */
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(40, 28, 60, 0.15);
+  border-color: #DBDAE3;
+}
+
+/* Section background style */
+.section-bg {
+  background-color: #F7FAFC;
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  border: 1px solid #E2E8F0;
+}
+
+/* Light card variant */
+.card-light {
+  background-color: #F7FAFC;
+  border: 1px solid #E2E8F0;
+  color: #1A202C;
+}
+
+/* Bordered elements */
+.border-subtle {
+  border: 1px solid var(--color-border);
+}
+
+/* Container styles */
+.container-custom {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+@media (max-width: 768px) {
+  .container-custom {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* Enhanced Animations & Effects */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in {
+  animation: fadeIn 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.slide-up {
+  animation: slideUp 0.7s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@keyframes slideInLeft {
+  from { transform: translateX(-40px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.slide-left {
+  animation: slideInLeft 0.7s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(40px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.slide-right {
+  animation: slideInRight 0.7s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@keyframes pulseScale {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.pulse {
+  animation: pulseScale 2s ease-in-out infinite;
+}
+
+/* Staggered animations - add delay-[n] to elements */
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+.delay-5 { animation-delay: 0.5s; }
+
+/* Modern button styles */
+.btn-primary {
+  background: var(--gradient-primary);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s ease;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-3px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-secondary {
+  background: var(--gradient-secondary);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s ease;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-3px);
+}
+
+/* Button with shine effect */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shine::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(30deg);
+  transition: transform 0.7s;
+  opacity: 0;
+}
+
+.btn-shine:hover::after {
+  transform: rotate(30deg) translateY(-100px);
+  opacity: 1;
+}
+
+/* Subtle hover effects */
+.hover-lift {
+  transition: transform 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+}
