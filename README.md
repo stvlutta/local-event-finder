@@ -88,6 +88,14 @@ By default, the application uses mock data. To connect to the EventBrite API:
 - `npm start` - Runs the app in development mode
 - `npm run build` - Builds the app for production
 
+## Team Members
+
+- **Steve Lutta** - Frontend Lead & UI Development
+- **Luke Rono** - API Integration & Backend Services
+- **Larry Opiyo** - UX Design & Component Development
+- **Mula Hirsi** - State Management & Data Modeling
+- **Tresor Rupande** - Testing & Documentation
+
 ## Contributing
 
 1. Fork the repository

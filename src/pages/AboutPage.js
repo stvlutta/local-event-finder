@@ -128,37 +128,37 @@ const AboutPage = () => {
           Local Event Finder is brought to you by a passionate team of developers and designers who are dedicated to creating the best event discovery platform for Kenya.
         </Paragraph>
         
-        <TeamGrid className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-8">
+        <TeamGrid className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
           <TeamMember className="bg-white rounded-lg shadow-md overflow-hidden hover:-translate-y-1 transition-transform">
             <MemberImage className="h-48 bg-gray-100 flex items-center justify-center text-5xl">
               👨‍💻
             </MemberImage>
             <MemberInfo className="p-6">
               <MemberName className="text-xl font-semibold text-primary mb-1">
-                Alex Kimani
+                Steve Lutta
               </MemberName>
               <MemberRole className="text-secondary font-medium mb-3">
-                Frontend Developer
+                Frontend Lead & UI Development
               </MemberRole>
               <MemberBio className="text-gray-700 text-sm">
-                Alex leads our frontend development, creating the user interfaces that make our platform intuitive and enjoyable to use.
+                Steve leads our frontend development, creating the responsive UI components and ensuring a smooth user experience.
               </MemberBio>
             </MemberInfo>
           </TeamMember>
           
           <TeamMember className="bg-white rounded-lg shadow-md overflow-hidden hover:-translate-y-1 transition-transform">
             <MemberImage className="h-48 bg-gray-100 flex items-center justify-center text-5xl">
-              👩‍💻
+              👨‍💻
             </MemberImage>
             <MemberInfo className="p-6">
               <MemberName className="text-xl font-semibold text-primary mb-1">
-                Faith Wangari
+                Luke Rono
               </MemberName>
               <MemberRole className="text-secondary font-medium mb-3">
-                Backend Developer
+                API Integration & Backend Services
               </MemberRole>
               <MemberBio className="text-gray-700 text-sm">
-                Faith handles our backend systems, ensuring data flows smoothly and our API integrations work perfectly.
+                Luke manages our API integrations and backend services, ensuring data flows smoothly between our platform and external services.
               </MemberBio>
             </MemberInfo>
           </TeamMember>
@@ -169,30 +169,47 @@ const AboutPage = () => {
             </MemberImage>
             <MemberInfo className="p-6">
               <MemberName className="text-xl font-semibold text-primary mb-1">
-                David Ochieng
+                Larry Opiyo
               </MemberName>
               <MemberRole className="text-secondary font-medium mb-3">
-                UI/UX Designer
+                UX Design & Component Development
               </MemberRole>
               <MemberBio className="text-gray-700 text-sm">
-                David creates the beautiful designs that make our platform visually appealing and user-friendly.
+                Larry handles user experience design and component development, creating intuitive interfaces that delight our users.
               </MemberBio>
             </MemberInfo>
           </TeamMember>
           
           <TeamMember className="bg-white rounded-lg shadow-md overflow-hidden hover:-translate-y-1 transition-transform">
             <MemberImage className="h-48 bg-gray-100 flex items-center justify-center text-5xl">
-              👩‍💼
+              👨‍💻
             </MemberImage>
             <MemberInfo className="p-6">
               <MemberName className="text-xl font-semibold text-primary mb-1">
-                Mary Mwangi
+                Mula Hirsi
               </MemberName>
               <MemberRole className="text-secondary font-medium mb-3">
-                Project Manager
+                State Management & Data Modeling
               </MemberRole>
               <MemberBio className="text-gray-700 text-sm">
-                Mary keeps everything on track, ensuring we deliver the best possible experience to our users.
+                Mula oversees application state management and data modeling, ensuring consistent data flow throughout the application.
+              </MemberBio>
+            </MemberInfo>
+          </TeamMember>
+          
+          <TeamMember className="bg-white rounded-lg shadow-md overflow-hidden hover:-translate-y-1 transition-transform">
+            <MemberImage className="h-48 bg-gray-100 flex items-center justify-center text-5xl">
+              👨‍💻
+            </MemberImage>
+            <MemberInfo className="p-6">
+              <MemberName className="text-xl font-semibold text-primary mb-1">
+                Tresor Rupande
+              </MemberName>
+              <MemberRole className="text-secondary font-medium mb-3">
+                Testing & Documentation
+              </MemberRole>
+              <MemberBio className="text-gray-700 text-sm">
+                Tresor ensures our application quality through comprehensive testing and maintains detailed documentation for the project.
               </MemberBio>
             </MemberInfo>
           </TeamMember>
