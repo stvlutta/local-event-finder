@@ -1,15 +1,15 @@
 import { eventService as apiEventService } from './api';
-import { mockEvents, mockCategories, mockCities } from '../data/mockEvents';
+import { mockEvents, mockCategories, mockCities, getEventsByCity } from '../data/mockEvents';
 
 // Flag to determine whether to use real API or mock data
-const USE_MOCK_DATA = process.env.REACT_APP_USE_MOCK_DATA === 'true' || !process.env.REACT_APP_EVENTBRITE_API_KEY;
+// Set to true by default to use mock data
+const USE_MOCK_DATA = true;
 
 const eventService = {
   // Get events with filtering
   getEvents: async (filters = {}) => {
     try {
       if (USE_MOCK_DATA) {
-        console.log('Using mock data for events');
         // Apply filters to mock data
         let filteredEvents = [...mockEvents];
         
@@ -20,9 +20,31 @@ const eventService = {
         }
         
         if (filters.category) {
-          filteredEvents = filteredEvents.filter(
-            event => event.category.toLowerCase() === filters.category.toLowerCase()
-          );
+          // Get a simplified category name that can be used for filtering
+          const getSimplifiedCategory = (category) => {
+            // Make lowercase
+            category = category.toLowerCase();
+            
+            // Map general terms to specific categories
+            if (category === 'tech') return 'technology';
+            if (category === 'arts' || category === 'arts & culture') return 'arts';
+            if (category === 'music') return 'music';
+            if (category === 'business' || category === 'business & professional') return 'business';
+            if (category === 'food' || category === 'food & drink') return 'food';
+            if (category === 'entertainment') return 'entertainment';
+            
+            return category;
+          };
+          
+          const filterCategory = getSimplifiedCategory(filters.category);
+          
+          // More flexible category matching
+          filteredEvents = filteredEvents.filter(event => {
+            const eventCategory = getSimplifiedCategory(event.category);
+            return eventCategory === filterCategory || 
+                   eventCategory.includes(filterCategory) || 
+                   filterCategory.includes(eventCategory);
+          });
         }
         
         if (filters.query) {
@@ -46,8 +68,29 @@ const eventService = {
           );
         }
         
-        // Sort by date (most recent first)
-        filteredEvents.sort((a, b) => new Date(a.start.local) - new Date(b.start.local));
+        // Sort by date (nearest upcoming events first)
+        const now = new Date();
+        filteredEvents.sort((a, b) => {
+          const dateA = new Date(a.start.local);
+          const dateB = new Date(b.start.local);
+          
+          // Put future events first, sorted by nearest date
+          if (dateA >= now && dateB >= now) {
+            return dateA - dateB;
+          }
+          
+          // Put future events before past events
+          if (dateA >= now && dateB < now) {
+            return -1;
+          }
+          
+          if (dateA < now && dateB >= now) {
+            return 1;
+          }
+          
+          // For past events, show most recent first
+          return dateB - dateA;
+        });
         
         return {
           pagination: {

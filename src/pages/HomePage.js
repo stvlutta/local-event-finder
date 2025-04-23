@@ -151,26 +151,43 @@ const PopularTags = styled.div`
   justify-content: center;
   gap: 0.5rem;
   margin-top: 2rem;
+  max-width: 100%;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  
+  @media (max-width: 768px) {
+    justify-content: flex-start;
+    padding-bottom: 1rem;
+  }
 `;
 
 const TagLink = styled(Link)`
   background-color: transparent;
   color: #FFFFFF; /* White on dark hero background */
-  font-size: 0.875rem;
-  padding: 0.5rem 1rem;
-  border-radius: 4px; /* Eventbrite subtle radius */
+  font-size: 0.8rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px; /* More rounded for better visibility */
   text-decoration: none;
   transition: all 0.2s ease;
   border: 1px solid rgba(255, 255, 255, 0.3);
   display: inline-block;
-  font-weight: 400;
-  margin: 0.25rem;
+  font-weight: 500;
+  margin: 0.2rem;
+  white-space: nowrap;
   
   &:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.8);
     color: #FFFFFF;
     text-decoration: none;
+    transform: translateY(-2px);
+  }
+  
+  /* Make "All Events" tag stand out */
+  &:first-child {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.8);
+    font-weight: 600;
   }
 `;
 
@@ -564,13 +581,13 @@ const HomePage = () => {
   // Get the 3 most recent events
   const featuredEvents = events.slice(0, 3);
   
-  // Cities with images
+  // Cities with images - hardcoded locally
   const cities = [
-    { name: "Nairobi", image: "https://images.unsplash.com/photo-1611348524140-53c9a25300c8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
-    { name: "Mombasa", image: "https://images.unsplash.com/photo-1566126282517-0ebe6687c572?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
-    { name: "Kisumu", image: "https://images.unsplash.com/photo-1558005530-a7958896ec60?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
-    { name: "Nakuru", image: "https://images.unsplash.com/photo-1506111583091-becfd4bfa05d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
-    { name: "Eldoret", image: "https://images.unsplash.com/photo-1519037419259-26969a76b23e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" }
+    { name: "Nairobi", image: "/images/nairobi.jpg" },
+    { name: "Mombasa", image: "/images/mombasa.jpg" },
+    { name: "Kisumu", image: "/images/kisumu.jpg" },
+    { name: "Nakuru", image: "/images/nakuru.jpg" },
+    { name: "Eldoret", image: "/images/eldoret.jpg" }
   ];
   
   return (
@@ -597,11 +614,56 @@ const HomePage = () => {
           
           <PopularTags className="tag-container">
             <TagLink to="/events" className="event-tag">All Events</TagLink>
-            <TagLink to="/events?category=Technology" className="event-tag">Tech</TagLink>
-            <TagLink to="/events?category=Music" className="event-tag">Music</TagLink>
-            <TagLink to="/events?category=Arts & Culture" className="event-tag">Arts</TagLink>
-            <TagLink to="/events?category=Business" className="event-tag">Business</TagLink>
-            <TagLink to="/events?category=Food & Drink" className="event-tag">Food</TagLink>
+            <TagLink 
+              to="/events?category=Technology" 
+              className="event-tag"
+              onClick={() => localStorage.setItem('selectedCategory', 'Technology')}
+            >Tech</TagLink>
+            <TagLink 
+              to="/events?category=Music" 
+              className="event-tag"
+              onClick={() => localStorage.setItem('selectedCategory', 'Music')}
+            >Music</TagLink>
+            <TagLink 
+              to="/events?category=Arts" 
+              className="event-tag"
+              onClick={() => localStorage.setItem('selectedCategory', 'Arts')}
+            >Arts</TagLink>
+            <TagLink 
+              to="/events?category=Business" 
+              className="event-tag"
+              onClick={() => localStorage.setItem('selectedCategory', 'Business')}
+            >Business</TagLink>
+            <TagLink 
+              to="/events?category=Food" 
+              className="event-tag"
+              onClick={() => localStorage.setItem('selectedCategory', 'Food')}
+            >Food</TagLink>
+            <TagLink 
+              to="/events?category=Sports" 
+              className="event-tag"
+              onClick={() => localStorage.setItem('selectedCategory', 'Sports')}
+            >Sports</TagLink>
+            <TagLink 
+              to="/events?category=Entertainment" 
+              className="event-tag"
+              onClick={() => localStorage.setItem('selectedCategory', 'Entertainment')}
+            >Entertainment</TagLink>
+            <TagLink 
+              to="/events?category=Education" 
+              className="event-tag"
+              onClick={() => localStorage.setItem('selectedCategory', 'Education')}
+            >Education</TagLink>
+            <TagLink 
+              to="/events?category=Health" 
+              className="event-tag"
+              onClick={() => localStorage.setItem('selectedCategory', 'Health')}
+            >Health</TagLink>
+            <TagLink 
+              to="/events?category=Community" 
+              className="event-tag"
+              onClick={() => localStorage.setItem('selectedCategory', 'Community')}
+            >Community</TagLink>
           </PopularTags>
         </HeroContent>
       </Hero>
@@ -656,6 +718,10 @@ const HomePage = () => {
               to={`/events?city=${city.name}`}
               className="slide-up"
               style={{ animationDelay: `${index * 0.1}s` }}
+              onClick={() => {
+                console.log(`Clicked on ${city.name}`);
+                localStorage.setItem('selectedCity', city.name);
+              }}
             >
               <CityImage src={city.image} alt={city.name} />
               <CityOverlay />

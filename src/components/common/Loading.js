@@ -8,31 +8,34 @@ const spin = keyframes`
 
 const LoadingContainer = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
-  min-height: 200px;
+  padding: 1.5rem;
+  min-height: 150px;
 `;
 
 const Spinner = styled.div`
-  border: 4px solid rgba(0, 0, 0, 0.1);
+  border: 3px solid rgba(0, 0, 0, 0.1);
   border-radius: 50%;
-  border-top: 4px solid var(--color-secondary);
-  width: 40px;
-  height: 40px;
-  animation: ${spin} 1s linear infinite;
+  border-top: 3px solid #D1410C; /* Eventbrite orange */
+  width: 35px;
+  height: 35px;
+  animation: ${spin} 0.8s linear infinite;
+  margin-bottom: 0.75rem;
 `;
 
 const LoadingText = styled.p`
-  margin-left: 1rem;
   font-weight: 500;
+  color: #666;
+  font-size: 0.9rem;
 `;
 
 const Loading = ({ message = "Loading..." }) => {
   return (
-    <LoadingContainer className="flex justify-center items-center py-8">
-      <Spinner className="border-4 border-gray-200 border-t-secondary rounded-full w-10 h-10 animate-spin" />
-      <LoadingText className="ml-4 font-medium">{message}</LoadingText>
+    <LoadingContainer>
+      <Spinner />
+      <LoadingText>{message}</LoadingText>
     </LoadingContainer>
   );
 };

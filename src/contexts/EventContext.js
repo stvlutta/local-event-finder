@@ -77,11 +77,33 @@ export const EventProvider = ({ children }) => {
     loadInitialData();
   }, []);
   
+  // Keep track of previous filters to avoid unnecessary reloads
+  const prevFiltersRef = React.useRef(filters);
+  
   // Update events when filters change
   useEffect(() => {
-    const fetchFilteredEvents = async () => {
-      setLoading(true);
+    // Check if filters have actually changed in a meaningful way
+    const hasFilterChanged = 
+      prevFiltersRef.current.category !== filters.category ||
+      prevFiltersRef.current.city !== filters.city ||
+      prevFiltersRef.current.query !== filters.query ||
+      prevFiltersRef.current.startDate !== filters.startDate ||
+      prevFiltersRef.current.endDate !== filters.endDate;
+    
+    if (!hasFilterChanged) {
+      return; // Skip if filters haven't actually changed
+    }
+    
+    // Update the previous filters reference
+    prevFiltersRef.current = {...filters};
+    
+    // Use a short delay to prevent flickering from rapid filter changes
+    const timeoutId = setTimeout(async () => {
+      if (!loading) setLoading(true);
+      
       try {
+        // Remove console logs for production
+        // console.log('Fetching events with filters:', filters);
         const eventsData = await eventService.getEvents(filters);
         setEvents(eventsData.events || []);
         setError(null);
@@ -91,10 +113,11 @@ export const EventProvider = ({ children }) => {
       } finally {
         setLoading(false);
       }
-    };
+    }, 200); // 200ms delay to debounce - quick but prevents flicker
     
-    fetchFilteredEvents();
-  }, [filters]);
+    // Cleanup timeout on unmount or when filters change again
+    return () => clearTimeout(timeoutId);
+  }, [filters, loading]);
   
   // Function to update filters
   const updateFilters = (newFilters) => {

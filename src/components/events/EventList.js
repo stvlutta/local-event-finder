@@ -26,31 +26,67 @@ const NoEventsMessage = styled.div`
 `;
 
 const EventList = () => {
-  const { events, loading, error } = useEvents();
+  const { events, loading, error, filters } = useEvents();
   
-  if (loading) {
-    return <Loading message="Loading events..." />;
-  }
+  // Use an effect to smoothly handle loading states
+  const [showLoading, setShowLoading] = React.useState(false);
   
+  React.useEffect(() => {
+    // Only show loading indicator if loading takes more than 500ms
+    // This prevents flicker for quick loads
+    let timer;
+    if (loading) {
+      timer = setTimeout(() => {
+        setShowLoading(true);
+      }, 500);
+    } else {
+      setShowLoading(false);
+    }
+    
+    return () => clearTimeout(timer);
+  }, [loading]);
+  
+  // Handle error state
   if (error) {
     return <ErrorMessage message={error} />;
   }
   
-  if (events.length === 0) {
+  // Handle no events state
+  if (!loading && events.length === 0) {
     return (
       <NoEventsMessage className="text-center p-12 bg-gray-50 rounded-lg my-8">
         <h3 className="text-xl font-semibold mb-2">No events found</h3>
-        <p className="text-gray-600">Try adjusting your filters or check back later for new events.</p>
+        <p className="text-gray-600">
+          Try adjusting your filters or check back later for new events.
+        </p>
+        <div className="mt-4 text-sm text-gray-500">
+          {filters.category && <div>Category: {filters.category}</div>}
+          {filters.city && <div>City: {filters.city}</div>}
+          {filters.query && <div>Search: {filters.query}</div>}
+        </div>
       </NoEventsMessage>
     );
   }
   
   return (
-    <EventsGrid className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 my-8">
-      {events.map(event => (
-        <EventCard key={event.id} event={event} />
-      ))}
-    </EventsGrid>
+    <>
+      {/* Conditionally render loading overlay only if loading state persists */}
+      {showLoading && (
+        <div className="flex justify-center my-8">
+          <Loading message="Loading events..." />
+        </div>
+      )}
+      
+      {/* Always render the grid, but hide it during loading */}
+      <EventsGrid 
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 my-8"
+        style={{ opacity: showLoading ? 0.3 : 1, transition: 'opacity 0.3s ease' }}
+      >
+        {events.map(event => (
+          <EventCard key={event.id} event={event} />
+        ))}
+      </EventsGrid>
+    </>
   );
 };
 
