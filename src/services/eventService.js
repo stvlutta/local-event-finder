@@ -14,9 +14,11 @@ const eventService = {
         let filteredEvents = [...mockEvents];
         
         if (filters.city) {
-          filteredEvents = filteredEvents.filter(
-            event => event.venue.address.city.toLowerCase() === filters.city.toLowerCase()
-          );
+          // Use the optimized getEventsByCity function for city filtering
+          filteredEvents = getEventsByCity(filters.city);
+          
+          // Log the number of events found for debugging
+          console.log(`Found ${filteredEvents.length} events in ${filters.city}`);
         }
         
         if (filters.category) {
@@ -47,26 +49,7 @@ const eventService = {
           });
         }
         
-        if (filters.query) {
-          const query = filters.query.toLowerCase();
-          filteredEvents = filteredEvents.filter(
-            event => 
-              event.name.text.toLowerCase().includes(query) || 
-              event.description.text.toLowerCase().includes(query)
-          );
-        }
-        
-        if (filters.startDate) {
-          filteredEvents = filteredEvents.filter(
-            event => new Date(event.start.local) >= new Date(filters.startDate)
-          );
-        }
-        
-        if (filters.endDate) {
-          filteredEvents = filteredEvents.filter(
-            event => new Date(event.end.local) <= new Date(filters.endDate)
-          );
-        }
+        // Simplified version - removed query, startDate, and endDate filters
         
         // Sort by date (nearest upcoming events first)
         const now = new Date();

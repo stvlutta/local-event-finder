@@ -17,13 +17,10 @@ export const EventProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   
-  // Filters state
+  // Simplified filters state - only city and category
   const [filters, setFilters] = useState({
     city: '',
-    category: '',
-    query: '',
-    startDate: '',
-    endDate: ''
+    category: ''
   });
 
   // Load initial data
@@ -77,33 +74,14 @@ export const EventProvider = ({ children }) => {
     loadInitialData();
   }, []);
   
-  // Keep track of previous filters to avoid unnecessary reloads
-  const prevFiltersRef = React.useRef(filters);
-  
   // Update events when filters change
   useEffect(() => {
-    // Check if filters have actually changed in a meaningful way
-    const hasFilterChanged = 
-      prevFiltersRef.current.category !== filters.category ||
-      prevFiltersRef.current.city !== filters.city ||
-      prevFiltersRef.current.query !== filters.query ||
-      prevFiltersRef.current.startDate !== filters.startDate ||
-      prevFiltersRef.current.endDate !== filters.endDate;
-    
-    if (!hasFilterChanged) {
-      return; // Skip if filters haven't actually changed
-    }
-    
-    // Update the previous filters reference
-    prevFiltersRef.current = {...filters};
-    
-    // Use a short delay to prevent flickering from rapid filter changes
-    const timeoutId = setTimeout(async () => {
-      if (!loading) setLoading(true);
+    // Add a debounce to prevent multiple rapid fetches
+    const debounceTimer = setTimeout(async () => {
+      setLoading(true);
       
       try {
-        // Remove console logs for production
-        // console.log('Fetching events with filters:', filters);
+        // Get events with filters (if any)
         const eventsData = await eventService.getEvents(filters);
         setEvents(eventsData.events || []);
         setError(null);
@@ -113,11 +91,11 @@ export const EventProvider = ({ children }) => {
       } finally {
         setLoading(false);
       }
-    }, 200); // 200ms delay to debounce - quick but prevents flicker
+    }, 300); // 300ms debounce
     
-    // Cleanup timeout on unmount or when filters change again
-    return () => clearTimeout(timeoutId);
-  }, [filters, loading]);
+    // Cleanup the timer on dependency changes
+    return () => clearTimeout(debounceTimer);
+  }, [filters]); // Remove loading dependency to prevent flicker
   
   // Function to update filters
   const updateFilters = (newFilters) => {
@@ -128,10 +106,7 @@ export const EventProvider = ({ children }) => {
   const resetFilters = () => {
     setFilters({
       city: '',
-      category: '',
-      query: '',
-      startDate: '',
-      endDate: ''
+      category: ''
     });
   };
   

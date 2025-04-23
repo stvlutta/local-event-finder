@@ -221,7 +221,7 @@ export const eventService = {
           try {
             // Fetch the specific post
             const response = await axios.get(`https://jsonplaceholder.typicode.com/posts/${postId}`);
-            const post = response.data;
+            const postData = response.data;
             
             // Transform it to look like an event
             const index = parseInt(postId); // Use post ID for deterministic event properties

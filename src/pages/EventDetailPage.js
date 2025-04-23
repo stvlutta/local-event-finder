@@ -358,18 +358,18 @@ const EventDetailPage = () => {
           <Card className="bg-white rounded-lg shadow-md p-6">
             <CardTitle className="text-xl font-semibold text-primary mb-4">Share Event</CardTitle>
             <div className="flex gap-4">
-              <a href="#" className="text-primary hover:text-primary-dark text-2xl" title="Share on Facebook">
+              <button className="text-primary hover:text-primary-dark text-2xl" title="Share on Facebook">
                 📱
-              </a>
-              <a href="#" className="text-primary hover:text-primary-dark text-2xl" title="Share on Twitter">
+              </button>
+              <button className="text-primary hover:text-primary-dark text-2xl" title="Share on Twitter">
                 📱
-              </a>
-              <a href="#" className="text-primary hover:text-primary-dark text-2xl" title="Share on WhatsApp">
+              </button>
+              <button className="text-primary hover:text-primary-dark text-2xl" title="Share on WhatsApp">
                 📱
-              </a>
-              <a href="#" className="text-primary hover:text-primary-dark text-2xl" title="Share via Email">
+              </button>
+              <button className="text-primary hover:text-primary-dark text-2xl" title="Share via Email">
                 📧
-              </a>
+              </button>
             </div>
           </Card>
         </Sidebar>
